@@ -4,12 +4,25 @@ describe User do
   let(:user) { User.create(:email => 'old@test.com', :password => 'spree123', :password_confirmation => 'spree123') }
 
   it "should include the confirmable Devise module" do
-
     User.devise_modules.include?(:confirmable).should be_true
-
   end
 
   before { Devise.stub_chain :mailer, :confirmation_instructions, :deliver => true }
+
+  context "when created" do
+
+    it "should send confirmation instruction when a regular user is created" do
+      user.confirmation_token.should_not be_nil
+    end
+
+    it "should not send confirmation instructions when an anonymous user is created" do
+      anonymous = User.anonymous!
+      anonymous.confirmation_token.should be_nil
+    end
+
+
+
+  end
 
   context "#save" do
 
