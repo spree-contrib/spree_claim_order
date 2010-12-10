@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  # Add your extension routes here
+  match 'send_confirmation_instructions' => 'users#send_confirmation_instructions'
 end

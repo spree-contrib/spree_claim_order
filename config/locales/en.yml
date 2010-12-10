@@ -1,0 +1,4 @@
+---
+en:
+  instructions_sent_success: "Instructions Sent."
+  instructions_sent_failied: "Error Sending Instructions."
