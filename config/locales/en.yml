@@ -1,4 +1,6 @@
 ---
 en:
   instructions_sent_success: "Instructions Sent."
-  instructions_sent_failied: "Error Sending Instructions."
+  instructions_sent_failed: "Error Sending Instructions."
+  order_claim_success: "Order Claimed."
+  order_claim_failure: "Error Claiming Order."
