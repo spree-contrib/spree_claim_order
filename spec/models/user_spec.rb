@@ -16,32 +16,24 @@ describe User do
 
   end
 
-  context "before save" do
+  context "email address changes" do
 
-    it "should call #reset_confirmed_at_if_email_changed" do
-      user.should_receive :reset_confirmed_at_if_email_changed
+    it "should set confirmed_at to nil" do
+      user.email = "new@test.com"
       user.save
-    end
-
-    context "email address changes" do
-
-      it "should set confirmed_at to nil" do
-        user.email = "new@test.com"
-        user.save
-        user.confirmed_at.should be_nil
-      end
-
-    end
-
-    context "email address does not change" do
-
-      it "should not change confirmed_at" do
-        user.login = "login"
-        user.save
-        user.confirmed_at.should_not be_nil
-      end
-
+      user.confirmed_at.should be_nil
     end
 
   end
+
+  context "email address does not change" do
+
+    it "should not change confirmed_at" do
+      user.login = "login"
+      user.save
+      user.confirmed_at.should_not be_nil
+    end
+
+  end
+
 end
