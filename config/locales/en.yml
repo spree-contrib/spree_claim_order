@@ -1,6 +1,8 @@
 ---
 en:
-  instructions_sent_success: "Instructions Sent."
+  claim_it: "Claim It!"
   instructions_sent_failed: "Error Sending Instructions."
-  order_claim_success: "Order Claimed."
+  instructions_sent_success: "Instructions Sent."
   order_claim_failure: "Error Claiming Order."
+  order_claim_success: "Order Claimed."
+  unclaimed_orders: "Unclaimed Orders"
