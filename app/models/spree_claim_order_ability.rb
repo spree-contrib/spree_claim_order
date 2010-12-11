@@ -3,7 +3,7 @@ class SpreeClaimOrderAbility
 
   def initialize(user)
     #############################
-    can :assign_to_rightful_owner, Order do |order|
+    can :claim, Order do |order|
       user.confirmed? && (user.email.downcase == order.email.downcase)
     end
   end

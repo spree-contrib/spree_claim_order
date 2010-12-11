@@ -4,7 +4,7 @@ OrdersController.class_eval do
 
   def claim
     order = Order.find_by_number params[:id]
-    authorize! :assign_to_rightful_owner, order
+    authorize! :claim, order
     if order.assign_to_rightful_owner
       flash[:notice] = t('order_claim_success')
     else
