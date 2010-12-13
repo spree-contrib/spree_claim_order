@@ -3,6 +3,7 @@ require 'spree_claim_order_ability'
 OrdersController.class_eval do
 
   skip_before_filter :check_authorization, :only => [:claim]
+  ssl_required :claim
 
   def claim
     order = Order.find_by_number params[:id]
