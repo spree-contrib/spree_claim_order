@@ -3,6 +3,7 @@ en:
   account_confirmation_successful: "You email address has been confirmed!"
   already_confirmed: "Email address has already been confirmed."
   claim_it: "Claim It!"
+  confirm_it: "Confirm It!"
   instructions_sent_success: "Confirmation Instructions Sent."
   invalid_token: "Invalid Confirmation Token."
   order_claim_failure: "Error Claiming Order."
