@@ -54,7 +54,9 @@ describe User do
 
     before do
       @claimed = user.orders.create(:email => user.email)
-      @unclaimed = Order.create(:user=> User.anonymous!, :email => user.email)
+      @unclaimed_incomplete = Order.create(:user=> User.anonymous!, :email => user.email)
+      @unclaimed_complete = Order.create(:user=> User.anonymous!, :email => user.email)
+      @unclaimed_complete.update_attributes_without_callbacks(:completed_at => Time.now)
     end
 
     context "when user is not confirmed" do
@@ -71,11 +73,15 @@ describe User do
 
       before { user.stub :confirmed? => true }
 
-      it "should return unclaimed orders" do
-        user.unclaimed_orders.include?(@unclaimed).should == true
+      it "should not include unclaimed_complete in result" do
+        user.unclaimed_orders.include?(@unclaimed_complete).should == true
       end
 
-      it "should not return claimed orders" do
+      it "should not include unclaimed_incomplete in result" do
+        user.unclaimed_orders.include?(@unclaimed_incomplete).should == false
+      end
+
+      it "should not included already associated orders in result" do
         user.unclaimed_orders.include?(@claimed).should == false
       end
     end

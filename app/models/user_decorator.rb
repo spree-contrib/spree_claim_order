@@ -3,7 +3,7 @@ User.class_eval do
   before_save :reset_confirmed_at_if_email_changed
 
   def unclaimed_orders
-    confirmed? ? Order.where("email = ? AND user_id != ?", email, id) : []
+    confirmed? ? Order.where("orders.email = ? AND orders.completed_at IS NOT NULL AND orders.user_id != ?", email, id) : []
   end
 
   # overrides User.anonymous! in spree_auth
