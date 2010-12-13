@@ -19,7 +19,7 @@
         <td><%= t(order.state).titleize %></td>
         <td><%= number_to_currency order.total %></td>
         <td>
-          <%= form_for(:order, :url => claim_order_path(order)) do %>
+          <%= form_for(:order, :url => claim_order_path(order), :html => {:method => :put}) do %>
             <%= submit_tag t("claim_it") %>
           <% end %>
         </td>
