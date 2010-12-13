@@ -1,8 +1,11 @@
 ---
 en:
+  account_confirmation_successful: "You email address has been confirmed!"
+  already_confirmed: "Email address has already been confirmed."
   claim_it: "Claim It!"
-  instructions_sent_failed: "Error Sending Instructions."
-  instructions_sent_success: "Instructions Sent."
+  instructions_sent_success: "Confirmation Instructions Sent."
+  invalid_token: "Invalid Confirmation Token."
   order_claim_failure: "Error Claiming Order."
   order_claim_success: "Order Claimed."
   unclaimed_orders: "Unclaimed Orders"
+  unconfirmed_account: "Your account has not yet been confirmed. If you would like for your confimation code to be re-sent, click the button below."
