@@ -1,5 +1,7 @@
 class UserMailer < ActionMailer::Base
 
+  default_url_options[:host] = Spree::Config[:site_url]
+
   def confirmation_instructions(user)
 
     @user = user
