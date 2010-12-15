@@ -9,7 +9,7 @@ User.class_eval do
   end
 
   before_save :reset_confirmed_at_if_email_changed
-  before_save :claim_all_unclaimed_orders, :if => Proc.new{ |user| !confirmation_required? }
+  after_save :claim_all_unclaimed_orders, :if => Proc.new{ |user| !confirmation_required? }
 
   def unclaimed_orders
     Order.where("orders.email = ? AND orders.completed_at IS NOT NULL AND orders.user_id != ?", email, id)
