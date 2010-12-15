@@ -1,17 +1,39 @@
 User.class_eval do
-  devise :confirmable
+
+  if Spree::ClaimOrder::Config[:require_email_confirmation]
+    devise :confirmable
+  else
+    # in case some other extension includes the :confirmable, we add it and remove it
+    devise :confirmable
+    User.devise_modules.pop
+  end
+
   before_save :reset_confirmed_at_if_email_changed
+  before_save :claim_all_unclaimed_orders, :if => Proc.new{ |user| !confirmation_required? }
 
   def unclaimed_orders
-    confirmed? ? Order.where("orders.email = ? AND orders.completed_at IS NOT NULL AND orders.user_id != ?", email, id) : []
+    Order.where("orders.email = ? AND orders.completed_at IS NOT NULL AND orders.user_id != ?", email, id)
   end
 
   # overrides User.anonymous! in spree_auth
   def self.anonymous!
     token = User.generate_token(:persistence_token)
     user = User.new(:email => "#{token}@example.net", :password => token, :password_confirmation => token, :persistence_token => token)
-    user.confirm!
+    user.confirm! if Spree::ClaimOrder::Config[:require_email_confirmation]
     user
+  end
+
+  def claim_all_unclaimed_orders
+    unclaimed_orders.each do |order|
+      order.assign_to_rightful_owner
+    end  unless confirmation_required?
+  end
+
+  protected
+
+  # overrides Devise::Modules::Confirmable#confirmation_required?
+  def confirmation_required?
+    User.devise_modules.include?(:confirmable) && !confirmed?
   end
 
   private
