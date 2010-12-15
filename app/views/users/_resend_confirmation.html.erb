@@ -1,4 +1,4 @@
-<% if @user.confirmed_at.nil? %>
+<% if @user.confirmed_at.nil? and !@user.unclaimed_orders.empty? %>
 <div class="flash notice">
   <p><%= t("unconfirmed_account") %></p>
   <%= form_for(:user, :url => create_user_confirmation_path, :html => { :method => :post }) do |f| %>
