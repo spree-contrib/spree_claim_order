@@ -7,6 +7,31 @@ describe Order do
   let(:order) { Order.create(:email => email, :user => User.anonymous!) }
   let(:user) { mock_model(User, :email => email, :password => password, :password_confirmation => password) }
 
+  context "after save" do
+
+    context "order is completed" do
+
+      before { order.stub(:completed_at => Time.now)}
+
+      it "should associate with correct user" do
+        order.should_receive(:assign_to_rightful_owner)
+        order.save
+      end
+
+    end
+
+    context "order is not completed" do
+
+      before { order.stub(:completed_at => nil)}
+
+      it "should not associate with correct user" do
+        order.should_not_receive(:assign_to_rightful_owner)
+        order.save
+      end
+
+    end
+  end
+
   context "#assign_to_rightful_owner" do
 
     it "should respond to #assign_to_rightful_owner" do
