@@ -9,4 +9,4 @@ en:
   order_claim_failure: "Error Claiming Order."
   order_claim_success: "Order Claimed."
   unclaimed_orders: "Unclaimed Orders"
-  unconfirmed_account: "Your account has not yet been confirmed. If you would like for your confimation code to be re-sent, click the button below."
+  unconfirmed_account: "You have unclaimed orders. To claim them, click the email confirmation link that was sent to your email address when you signed-up."
