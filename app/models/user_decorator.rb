@@ -33,7 +33,7 @@ User.class_eval do
 
   # overrides Devise::Modules::Confirmable#confirmation_required?
   def confirmation_required?
-    User.devise_modules.include?(:confirmable) && !confirmed?
+    User.devise_modules.include?(:confirmable) && !unclaimed_orders.empty? && !confirmed?
   end
 
   private

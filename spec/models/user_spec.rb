@@ -8,6 +8,8 @@ describe User do
       User.devise_modules.delete(:confirmable)
       Spree::ClaimOrder::Config.set(:require_email_confirmation => true)
       load('app/models/user_decorator.rb')
+      o = Order.create(:email => 'old@test.com')
+      o.update_attributes_without_callbacks(:completed_at => Time.now)
       @user = User.create(:email => 'old@test.com', :password => 'spree123', :password_confirmation => 'spree123')
     end
 
@@ -26,6 +28,12 @@ describe User do
       it "should not send confirmation instructions when an anonymous user is created" do
         anonymous = User.anonymous!
         anonymous.confirmation_token.should be_nil
+      end
+
+      it "should not send confirmation instructions when a regular user is created with no unclaimed orders" do
+        user = User.create(:email => 'other@test.com', :password => 'spree123', :password_confirmation => 'spree123')
+        user.stub(:unclaimed_orders => [])
+        user.confirmation_token.should be_nil
       end
 
     end
@@ -47,6 +55,7 @@ describe User do
       it "should not claim any unclaimed orders if confirmed_at is nil" do
         @user.stub(:confirmed_at => nil)
         @user.should_not_receive(:claim_all_unclaimed_orders)
+        @user.stub(:unclaimed_orders => ['something'])
         @user.save
       end
 
