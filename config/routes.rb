@@ -5,5 +5,4 @@ Rails.application.routes.draw do
     get "/user_confirmation/:confirmation_token" => "user_confirmations#show", :as => :user_confirmation
   end
 
-  match 'orders/:id/claim' => 'orders#claim', :via => :put, :as => :claim_order
 end
