@@ -17,17 +17,6 @@ describe Order do
 
     context "after save" do
 
-      context "order is completed" do
-
-        before { order.stub(:completed_at => Time.now)}
-
-        it "should associate with correct user" do
-          order.should_receive(:assign_to_rightful_owner)
-          order.save
-        end
-
-      end
-
       context "order is not completed" do
 
         before { order.stub(:completed_at => nil)}

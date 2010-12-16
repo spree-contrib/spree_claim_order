@@ -59,12 +59,6 @@ describe User do
         @user.save
       end
 
-      it "should claim any unclaimed orders if confirmed" do
-        @user.stub(:confirmed_at => Time.now)
-        @user.should_receive(:claim_all_unclaimed_orders)
-        @user.save
-      end
-
       context "email address does not change" do
 
         it "should not change confirmed_at" do
@@ -158,16 +152,6 @@ describe User do
 
         it "should not send confirmation instruction when a regular user is created" do
           @user.confirmation_token.should be_nil
-        end
-
-      end
-
-      context "#save" do
-
-        it "should claim any unclaimed orders if confirmed_at is nil" do
-          @user.stub(:confirmed_at => nil)
-          @user.should_receive(:claim_all_unclaimed_orders)
-          @user.save
         end
 
       end
