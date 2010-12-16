@@ -4,6 +4,7 @@ en:
   already_confirmed: "Email address has already been confirmed."
   claim_it: "Claim It!"
   confirm_it: "Confirm It!"
+  confirmation_instructions: "Confirmation Link"
   instructions_sent_success: "Confirmation Instructions Sent."
   invalid_token: "Invalid Confirmation Token."
   order_claim_failure: "Error Claiming Order."
