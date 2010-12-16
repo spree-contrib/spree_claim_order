@@ -38,6 +38,16 @@ describe User do
 
     end
 
+    context "User.anonymous!" do
+
+      let(:anonymous) { User.anonymous! }
+
+      it "should return a user in the database" do
+        anonymous.id.should_not be_nil
+      end
+
+    end
+
     context "#save" do
 
       before { @user.confirm! }
@@ -152,6 +162,16 @@ describe User do
 
         it "should not send confirmation instruction when a regular user is created" do
           @user.confirmation_token.should be_nil
+        end
+
+      end
+
+      context "User.anonymous!" do
+
+        let(:anonymous) { User.anonymous! }
+
+        it "should return a user in the database" do
+          anonymous.id.should_not be_nil
         end
 
       end

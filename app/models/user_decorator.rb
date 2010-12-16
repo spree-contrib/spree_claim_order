@@ -18,7 +18,7 @@ User.class_eval do
   # overrides User.anonymous! in spree_auth
   def self.anonymous!
     token = User.generate_token(:persistence_token)
-    user = User.new(:email => "#{token}@example.net", :password => token, :password_confirmation => token, :persistence_token => token)
+    user = User.create(:email => "#{token}@example.net", :password => token, :password_confirmation => token, :persistence_token => token)
     user.confirm! if Spree::ClaimOrder::Config[:require_email_confirmation]
     user
   end
