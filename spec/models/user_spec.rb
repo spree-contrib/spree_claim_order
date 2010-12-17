@@ -48,6 +48,23 @@ describe User do
 
     end
 
+    context "#confirm!" do
+
+      let(:unconfirmed) { User.create(:email => 'old@test.com', :password => 'spree123', :password_confirmation => 'spree123') }
+      after { unconfirmed.confirm! }
+
+      it "should call devise_confirm!" do
+        unconfirmed.stub(:claim_all_unclaimed_orders => true)
+        unconfirmed.should_receive(:devise_confirm!)
+      end
+
+      it "should call claim_all_unclaimed_orders" do
+        unconfirmed.stub(:devise_confirm! => true)
+        unconfirmed.should_receive(:claim_all_unclaimed_orders)
+      end
+
+    end
+
     context "#save" do
 
       before { @user.confirm! }

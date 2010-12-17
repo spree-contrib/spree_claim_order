@@ -29,13 +29,6 @@ User.class_eval do
     end  unless confirmation_required?
   end
 
-  protected
-
-  # overrides Devise::Modules::Confirmable#confirmation_required?
-  def confirmation_required?
-   User.devise_modules.include?(:confirmable) && !unclaimed_orders.empty? && !confirmed?
-  end
-
   private
 
   def reset_confirmed_at_if_email_changed
