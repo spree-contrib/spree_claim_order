@@ -27,13 +27,13 @@ RSpec::Core::RakeTask.new
 
 desc "Regenerates a rails 3 app for testing"
 task :test_app do
-  require '../lib/generators/spree/test_app_generator'
+  require '../spree/lib/generators/spree/test_app_generator'
   class ClaimOrderTestAppGenerator < Spree::Generators::TestAppGenerator
     def tweak_gemfile
       append_file 'Gemfile' do
 <<-gems
-        gem 'spree_core', :path => \'#{File.join(File.dirname(__FILE__), "..", "core")}\'
-        gem 'spree_auth', :path => \'#{File.join(File.dirname(__FILE__), "..", "auth")}\'
+        gem 'spree_core', :path => \'#{File.join(File.dirname(__FILE__), "../spree/", "core")}\'
+        gem 'spree_auth', :path => \'#{File.join(File.dirname(__FILE__), "../spree/", "auth")}\'
         gem 'spree_claim_order', :path => \'#{File.dirname(__FILE__)}\'
 gems
       end
