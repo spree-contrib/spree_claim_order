@@ -1,6 +1,5 @@
 class UserConfirmationsController < Devise::ConfirmationsController
   include SpreeBase
-  include Spree::AuthUser
   helper :users, 'spree/base'
   ssl_required
 
