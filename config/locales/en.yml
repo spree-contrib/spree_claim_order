@@ -6,6 +6,7 @@ en:
   confirm_it: "Confirm It!"
   confirmation_instructions: "Confirmation Link"
   instructions_sent_success: "Confirmation Instructions Sent."
+  instructions_sent_at_registration: "You have unclaimed orders. A confirmation email has been sent. The unclaimed orders will be associated with your account once your email has been confirmed."
   invalid_token: "Invalid Confirmation Token."
   order_claim_failure: "Error Claiming Order."
   order_claim_success: "Order Claimed."
