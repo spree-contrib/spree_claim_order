@@ -1,7 +1,9 @@
 UserRegistrationsController.class_eval do
 
-  after_filter :claim_unclaimed, :only => :create, :if => Spree::ClaimOrder::Config[:require_email_confirmation]
-  after_filter :unclaimed_orders_flash, :only => :create
+  after_filter do
+    claim_unclaimed if => Spree::ClaimOrder::Config[:require_email_confirmation]
+  end, :only => :create
+  after_filter :unclaimed_orders_flash
 
   private
 
