@@ -1,3 +1,7 @@
 class ClaimOrderHooks < Spree::ThemeSupport::HookListener
-  insert_before :account_summary, 'users/resend_confirmation'
+  Deface::Override.new(:virtual_path => "users/show",
+                     :name => "converted_account_summary_213351741",
+                     :insert_before => "[data-hook='account_summary'], #account_summary[data-hook]",
+                     :partial => "users/resend_confirmation",
+                     :disabled => false)
 end
